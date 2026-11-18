@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Товар — Знатная мука</title>
+  <link rel="stylesheet" href="main.css">
+  <style>
+    .product-page { max-width: 1100px; margin: 0 auto; padding: 48px 20px 70px; }
+    .product-breadcrumb { margin-bottom: 24px; }
+    .product-breadcrumb a { color: #263b2b; }
+    .product-layout { display: grid; grid-template-columns: minmax(280px, 1fr) minmax(280px, 1fr); gap: 44px; align-items: start; }
+    .product-photo { width: 100%; max-height: 520px; object-fit: contain; background: #f3f5f2; border-radius: 10px; }
+    .product-title { margin: 0 0 18px; text-align: left; background: none; color: #263b2b; }
+    .product-description { line-height: 1.7; }
+    .product-specs { margin: 24px 0; padding: 20px; background: #f3f5f2; border-radius: 8px; }
+    .product-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .product-button { display: inline-block; padding: 13px 22px; background: #263b2b; color: #fff; text-decoration: none; border-radius: 6px; }
+    .product-button.secondary { background: #c99b52; color: #1f2b20; }
+    .product-error { padding: 30px; text-align: center; }
+    @media (max-width: 700px) { .product-layout { grid-template-columns: 1fr; gap: 24px; } }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="index.html#top" aria-label="Знатная мука — на главную">
+        <img class="brand-logo" src="/img/logokling3.png" alt="Знатная мука">
+        <span>Знатная мука<small>МУКОМОЛЬНОЕ ПРЕДПРИЯТИЕ</small></span>
+      </a>
+      <a class="product-button" href="index.html#product">К продукции</a>
+    </div>
+  </header>
+
+  <main class="product-page">
+    <div class="product-breadcrumb"><a href="index.html#product">← Вернуться к продукции</a></div>
+    <div id="product-content"></div>
+  </main>
+
+  <script>
+    const products = {
+      1: { name: "Мука пшеничная хлебопекарная в/с", image: "img/cardmuka1.png", pack: "25 кг, 50 кг", text: "Высококачественная пшеничная мука высшего сорта для хлебопекарных и кондитерских изделий." },
+      2: { name: "Мука пшеничная хлебопекарная 1 сорт", image: "img/cardmuka.png", pack: "25 кг, 50 кг", text: "Пшеничная хлебопекарная мука первого сорта для профессионального и домашнего использования." },
+      3: { name: "Мука пшеничная хлебопекарная 2 сорт", image: "img/cardmuka.png", pack: "25 кг, 50 кг", text: "Пшеничная мука второго сорта для выпечки хлеба и приготовления различных изделий." },
+      4: { name: "Мука пшеничная общего назначения М 55-23", image: "img/cardmuka.png", pack: "25 кг, 50 кг", text: "Мука общего назначения для хлебопекарного и пищевого производства." },
+      5: { name: "Мука пшеничная общего назначения М 75-23", image: "img/cardmuka.png", pack: "25 кг, 50 кг", text: "Универсальная пшеничная мука для предприятий пищевой отрасли и оптовых поставок." },
+      6: { name: "Отруби пшеничные", image: "img/cardmuka.png", pack: "25 кг, 50 кг", text: "Натуральные пшеничные отруби — побочный продукт переработки зерна." },
+      7: { name: "Мука пшеничная цельнозерновая хлебопекарная обойная", image: "img/cardmuka.png", pack: "25 кг, 50 кг", text: "Цельнозерновая обойная мука для производства хлеба и полезной выпечки." },
+      8: { name: "Мука ржаная хлебопекарная обдирная", image: "img/cardmuka.png", pack: "25 кг, 50 кг", text: "Ржаная обдирная мука для традиционного хлеба и хлебобулочных изделий." },
+      9: { name: "Мука овсяная", image: "img/cardmuka.png", pack: "25 кг, 50 кг", text: "Овсяная мука для пищевого производства и приготовления выпечки." }
+    };
+
+    const id = new URLSearchParams(location.search).get("id");
+    const product = products[id];
+    const content = document.getElementById("product-content");
+
+    if (!product) {
+      document.title = "Товар не найден — Знатная мука";
+      content.innerHTML = '<div class="product-error"><h1>Товар не найден</h1><p>Выберите товар на странице продукции.</p><a class="product-button" href="index.html#product">Перейти к продукции</a></div>';
+    } else {
+      document.title = `${product.name} — Знатная мука`;
+      content.innerHTML = `
+        <div class="product-layout">
+          <img class="product-photo" src="${product.image}" alt="${product.name}">
+          <section>
+            <h1 class="product-title">${product.name}</h1>
+            <p class="product-description">${product.text}</p>
+            <div class="product-specs"><strong>Фасовка:</strong> ${product.pack}</div>
+            <div class="product-actions">
+              <a class="product-button secondary" href="index.html#contacts">Узнать цену</a>
+              <a class="product-button" href="index.html#product">Другие товары</a>
+            </div>
+          </section>
+        </div>`;
+    }
+  </script>
+</body>
+</html>
